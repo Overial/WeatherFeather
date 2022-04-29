@@ -1,0 +1,15 @@
+﻿@if (ViewBag.StatusMsg == "data_catched")
+{
+	<p>Загрузка завершена!</p>
+	<p>Количество успешно загруженных файлов: @ViewBag.SuccessfullyUploadedFilesCount из 3</p>
+	<p>Количество загруженных cтрок с данными: @ViewBag.SuccessfullyUploadedRowDataCount</p>
+	<p>Количество ошибок при обработке строк: @ViewBag.RowErrorsCount</p>
+	<p>Количество ошибок при обработке страниц: @ViewBag.SheetErrorsCount</p>
+	<p>Количество файлов, превысивших максимальный допустимый размер: @ViewBag.TooLargeFilesCount из 3</p>
+}
+else
+{
+	<p>Неизвестная ошибка!</p>
+}
+
+<a asp-area="" asp-controller="Home" asp-action="Index">На главную</a>

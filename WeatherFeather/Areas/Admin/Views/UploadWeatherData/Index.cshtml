@@ -1,0 +1,16 @@
+﻿<h2>Загрузить файл Excel</h2>
+<div>
+    <form asp-controller="UploadWeatherData" asp-action="Import" method="post" enctype="multipart/form-data">
+        <div>
+            Загрузите файл Excel (максимальный размер файла – @ViewBag.FileSizeLimit МБ):
+
+            <div class=".div-box">
+                <input type="file" name="uploadedFiles" /><br />
+                <input type="file" name="uploadedFiles" /><br />
+                <input type="file" name="uploadedFiles" /><br />
+            </div>
+            
+            <input type="submit" value="Загрузить" />
+        </div>
+    </form>
+</div>

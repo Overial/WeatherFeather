@@ -1,0 +1,227 @@
+﻿@using WeatherFeather.Models;
+
+@model IndexViewModel
+
+<style>
+	table {
+		border: 0;
+		width: 100%;
+		max-width: 500px;
+	}
+
+	table thead {
+		background-color: #828b99;
+	}
+
+	table th {
+		padding: 5px;
+		font-size: 0.9em;
+	}
+
+	table tr:hover {
+		background-color: #b5b5b5;
+	}
+
+	table td {
+		border-bottom: 1px dashed #000;
+		padding: 5px;
+		font-size: 0.9em;
+	}
+</style>
+
+<div>
+	<div class="searching-box">
+		@using (Html.BeginForm("Index", "ViewWeatherData", FormMethod.Get))
+		{
+			<h3>Поиск по годам</h3>
+			@Html.DropDownList("yearSearchString", Model.YearSelectList as SelectList, "Выберите год")
+
+			<h3>Поиск по месяцам</h3>
+			@Html.DropDownList("monthSearchString", Model.MonthSelectList as SelectList, "Выберите месяц")
+
+			<br />
+			<input type="submit" value="Найти" />
+
+			<input asp-controller="ViewWeatherData" asp-action="Reset" type="submit" value="Сброс" />
+		}
+	</div>
+
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="Year" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Год
+						</a>
+					</th>
+
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="Month" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Месяц
+						</a>
+					</th>
+
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="Date" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Дата
+						</a>
+					</th>
+
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="Time" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Время
+						</a>
+					</th>
+					
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="AtmosphericTemperature" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Температура
+						</a>
+					</th>
+
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="Humidity" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Влажность
+						</a>
+					</th>
+
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="DewPoint" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Точка росы
+						</a>
+					</th>
+
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="AtmosphericPressure" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Атмосферное давление
+						</a>
+					</th>
+
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="WindDirection" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Направление ветра
+						</a>
+					</th>
+
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="WindSpeed" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Скорость ветра
+						</a>
+					</th>
+
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="Cloudiness" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Облачность
+						</a>
+					</th>
+
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="CloudBase" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Нижняя граница облачности
+						</a>
+					</th>
+
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="Humidity" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Горизонтальная видимость
+						</a>
+					</th>
+
+					<th>
+						<a asp-controller="ViewWeatherData" asp-action="Index"
+					     asp-route-sortCol="Humidity" asp-route-sortParam=@ViewBag.SortParam
+						 asp-route-yearSearchString=@ViewBag.YearSearchString
+						 asp-route-monthSearchString=@ViewBag.MonthSearchString>
+							Погодные явления
+						</a>
+					</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@foreach (var weatherItem in Model.PagedWeatherItems)
+				{
+					<tr>
+						<th>@weatherItem.Year</th>
+						<th>@weatherItem.Month</th>
+						<th>@weatherItem.Date</th>
+						<th>@weatherItem.Time</th>
+						<th>@weatherItem.AtmosphericTemperature</th>
+						<th>@weatherItem.Humidity</th>
+						<th>@weatherItem.DewPoint</th>
+						<th>@weatherItem.AtmosphericPressure</th>
+						<th>@weatherItem.WindDirection</th>
+						<th>@weatherItem.WindSpeed</th>
+						<th>@weatherItem.Cloudiness</th>
+						<th>@weatherItem.CloudBase</th>
+						<th>@weatherItem.HorizontalVisibility</th>
+						<th>@weatherItem.WeatherEvents</th>
+					</tr>
+				}
+			</tbody>
+		</table>
+
+		@if (Model.PageViewModel.HasPreviousPage)
+		{
+			<a asp-controller="ViewWeatherData" asp-action="Index"
+			asp-route-sortCol=@ViewBag.SortCol
+			asp-route-sortParam=@ViewBag.SortParam
+			asp-route-yearSearchString=@ViewBag.YearSearchString
+			asp-route-monthSearchString=@ViewBag.MonthSearchString
+			asp-route-pageNumber="@(Model.PageViewModel.PageNumber - 1)">
+				Назад
+			</a>
+		}
+		@if (Model.PageViewModel.HasNextPage)
+		{
+			<a asp-controller="ViewWeatherData" asp-action="Index"
+			asp-route-sortCol=@ViewBag.SortCol
+			asp-route-sortParam=@ViewBag.SortParam
+			asp-route-yearSearchString=@ViewBag.YearSearchString
+			asp-route-monthSearchString=@ViewBag.MonthSearchString
+			asp-route-pageNumber="@(Model.PageViewModel.PageNumber + 1)">
+				Вперед
+			</a>
+		}
+	</div>
+</div>

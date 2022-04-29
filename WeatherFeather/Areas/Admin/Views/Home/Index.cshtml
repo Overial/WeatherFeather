@@ -1,0 +1,68 @@
+﻿@using WeatherFeather.Models;
+
+@model IndexViewModel
+
+@{
+	string strTitle = "Панель администратора";
+	ViewBag.Title = strTitle;
+}
+
+<div>
+    <div class="admin-panel">@strTitle</div>
+
+    <div class="admin-exit-button">
+        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+            <input type="submit" value="Выйти" />
+        </form>
+    </div>
+
+    <h3>Редактировать страницы веб-приложения</h3>
+    <div class="div-box">
+        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageIndex">Главная</a>
+        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageContacts">Контакты</a>
+    </div>
+
+    <h3>Управление записями о погоде</h3>
+    <div class="div-box">
+        <a asp-area="Admin" asp-controller="WeatherItems" asp-action="Edit" asp-route-id="">Добавить запись о погоде</a>
+    </div>
+
+    <div>
+        <div>
+            @foreach (WeatherItem entity in Model.PagedWeatherItems)
+            {
+                <div>
+                    |
+                    @($"{entity.Date}")
+                    |
+                    <a asp-area="Admin" asp-controller="WeatherItems" asp-action="Edit" asp-route-id="@entity.Id">
+                        Редактировать
+                    </a>
+                    |
+                    <form style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="WeatherItems" asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@entity.Id">
+                        <a href="#" onclick="document.getElementById('form-@entity.Id').submit();">
+                            Удалить
+                        </a>
+                    </form>
+                    |
+                </div>
+            }
+        </div>
+
+        @if (Model.PageViewModel.HasPreviousPage)
+		{
+			<a asp-area="Admin" asp-controller="Home" asp-action="Index"
+			asp-route-pageNumber="@(Model.PageViewModel.PageNumber - 1)">
+				Назад
+			</a>
+		}
+		@if (Model.PageViewModel.HasNextPage)
+		{
+			<a asp-area="Admin" asp-controller="Home" asp-action="Index"
+			asp-route-pageNumber="@(Model.PageViewModel.PageNumber + 1)">
+				Вперед
+			</a>
+		}
+    </div>
+</div>

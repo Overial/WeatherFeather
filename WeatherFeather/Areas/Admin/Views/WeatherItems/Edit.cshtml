@@ -1,0 +1,109 @@
+﻿@model WeatherItem
+
+@{
+	string strTitle = "Редактировать запись о погоде";
+	ViewBag.Title = strTitle;
+}
+
+<!-- Connect TinyMCE -->
+<script src="https://cdn.tiny.cloud/1/gbhqnm8qjlz53si5kv0359gr4m8dk1zzlworlewwv41ou00p/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+      toolbar_mode: 'floating',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+    });
+</script>
+
+<div>
+    <h2>@strTitle</h2>
+    <div>
+        <form asp-area="Admin" asp-controller="WeatherItems" asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="DateAdded" />
+
+            <div asp-validation-summary="All"></div>
+
+            <div class="div-box">
+                <label asp-for="MetaTitle"></label>
+                <input asp-for="MetaTitle" />
+                <span asp-validation-for="MetaTitle"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Year"></label>
+                <input asp-for="Year" />
+                <span asp-validation-for="Year"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Month"></label>
+                <input asp-for="Month" />
+                <span asp-validation-for="Month"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Date"></label>
+                <input asp-for="Date" />
+                <span asp-validation-for="Date"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Time"></label>
+                <input asp-for="Time" />
+                <span asp-validation-for="Time"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="AtmosphericTemperature"></label>
+                <input asp-for="AtmosphericTemperature">
+                <span asp-validation-for="AtmosphericTemperature"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Humidity"></label>
+                <input asp-for="Humidity" />
+                <span asp-validation-for="Humidity"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="DewPoint"></label>
+                <input asp-for="DewPoint" />
+                <span asp-validation-for="DewPoint"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="AtmosphericPressure"></label>
+                <input asp-for="AtmosphericPressure" />
+                <span asp-validation-for="AtmosphericPressure"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="WindDirection"></label>
+                <input asp-for="WindDirection" />
+                <span asp-validation-for="WindDirection"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="WindSpeed"></label>
+                <input asp-for="WindSpeed" />
+                <span asp-validation-for="WindSpeed"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Cloudiness"></label>
+                <input asp-for="Cloudiness" />
+                <span asp-validation-for="Cloudiness"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="CloudBase"></label>
+                <input asp-for="CloudBase" />
+                <span asp-validation-for="CloudBase"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="HorizontalVisibility"></label>
+                <input asp-for="HorizontalVisibility" />
+                <span asp-validation-for="HorizontalVisibility"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="WeatherEvents"></label>
+                <input asp-for="WeatherEvents" />
+                <span asp-validation-for="WeatherEvents"></span>
+            </div>
+
+            <input type="submit" value="Сохранить" />
+        </form>
+    </div>
+</div>
